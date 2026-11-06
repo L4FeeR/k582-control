@@ -1,0 +1,7 @@
+# K582 Control: let the logged-in user talk to the Redragon K582 (320F:5000) without root.
+# Lighting (vendor HID interface)
+KERNEL=="hidraw*", ATTRS{idVendor}=="320f", ATTRS{idProduct}=="5000", MODE="0660", TAG+="uaccess"
+# Key remapping: read the K582's key events (only this keyboard, not your laptop keyboard)
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{idVendor}=="320f", ATTRS{idProduct}=="5000", TAG+="uaccess"
+# Key remapping: create the virtual keyboard that sends the remapped keys
+KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"

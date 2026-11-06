@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=K582 Control
+Comment=Lighting, per-key colours, animations, remaps and macros for the Redragon K582
+Exec=@LAUNCHER@
+Icon=input-keyboard
+Categories=Settings;HardwareSettings;
+Terminal=false
