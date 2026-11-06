@@ -43,6 +43,28 @@ To check yours, run `lsusb | grep 320f`. Other EVision-based keyboards with the 
 
 ## Installation
 
+### Arch Linux, CachyOS, Manjaro, EndeavourOS (AUR)
+
+[![AUR version](https://img.shields.io/aur/version/k582-control)](https://aur.archlinux.org/packages/k582-control)
+
+```sh
+yay -S k582-control        # or: paru -S k582-control
+```
+
+Then unplug the keyboard and plug it back in once, and open **K582 Control** from your app menu or run `k582ctl`.
+The package installs the udev rule for you, so there's nothing else to set up.
+
+### Other distributions (from source)
+
+Install PySide6 and python-evdev with your package manager:
+
+| Distribution | Command |
+|---|---|
+| Debian / Ubuntu | `sudo apt install python3-pyside6.qtwidgets python3-evdev` |
+| Fedora | `sudo dnf install python3-pyside6 python3-evdev` |
+
+Then:
+
 ```sh
 git clone https://github.com/L4FeeR/k582-control.git
 cd k582-control
@@ -57,9 +79,9 @@ cd k582-control
 
 Then unplug the keyboard and plug it back in once, and open **K582 Control** from your app menu or run `./k582ctl.sh`.
 
-**Other distributions:** install PySide6 and python-evdev with your package manager (for example `sudo apt install python3-pyside6.qtwidgets python3-evdev` on Debian/Ubuntu, or `sudo dnf install python3-pyside6 python3-evdev` on Fedora). Then run `./install.sh`; its pacman step is skipped when the libraries are already present.
-
 ## Command line
+
+With the AUR package, the command is `k582ctl`. From a source checkout, use `./k582ctl.sh`.
 
 ```sh
 ./k582ctl.sh                                    # open the app
@@ -95,10 +117,24 @@ Settings, profiles, macros and animations are stored in `~/.config/k582-control/
 
 ## Uninstall
 
+**AUR package:**
+
+```sh
+sudo pacman -Rns k582-control
+```
+
+**Installed from source:**
+
 ```sh
 sudo rm /etc/udev/rules.d/60-k582.rules
-rm ~/.local/share/applications/k582-control.desktop ~/.config/autostart/k582-control.desktop
-rm -r ~/.config/k582-control        # optional: your profiles and macros
+rm ~/.local/share/applications/k582-control.desktop
+```
+
+**Either way**, you can also remove the login autostart and your settings:
+
+```sh
+rm ~/.config/autostart/k582-control.desktop
+rm -r ~/.config/k582-control        # your profiles, macros and animations
 ```
 
 ## Protocol
@@ -132,7 +168,7 @@ k582ctl/
   remapd.py      key remapper and macro engine (evdev + uinput)
   cli.py         command line
   gui/           Qt (PySide6) app
-packaging/       udev rule and desktop entry
+packaging/       udev rule, desktop entry, AUR PKGBUILD
 research/        protocol capture notes
 ```
 
